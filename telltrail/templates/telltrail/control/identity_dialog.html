@@ -1,0 +1,27 @@
+<h5>Add an Identity</h5>
+<form id="identity_form" method="POST" action="/control/identity/add/">
+	<table class="layout_table">
+		{{ form.as_table }}
+		<tr>
+			<td colspan="2">
+				<input type="submit" value="Save" class="button">
+				<a href="javascript:close_dialog('identity_panel')"><strong>Cancel</strong></a>
+			</td>
+		</tr>
+	</table>
+</form>
+<script type="text/javascript" charset="utf-8">
+	$(function(){
+		$('.button').button();
+		
+		$('#identity_form').ajaxForm(function(data){
+			if (data == 'OK') {
+				$('#identity_panel').fadeOut();
+				$('#identity_list').load('/control/identity/list/');
+			}
+			else {
+				$('#identity_panel').html(data);
+			}
+		});
+	});
+</script>

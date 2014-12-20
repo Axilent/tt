@@ -1,0 +1,9 @@
+{% extends "telltrail/base.html" %}
+
+{% block content %}
+	{% if user.is_anonymous %}
+		{% include 'telltrail/logged_out_landing.html' %}
+	{% else %}
+		{% include 'telltrail/dashboard.html' %}
+	{% endif %}
+{% endblock %}

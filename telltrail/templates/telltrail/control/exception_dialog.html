@@ -1,0 +1,35 @@
+<h5>Add an Exception</h5>
+<form id="exception_form" method="POST" action="/control/exception/add/">
+	<table class="layout_table">
+		<tr>
+			<td>{{ form.consumer.errors }}{{ form.consumer }} is</td>
+		</tr>
+		<tr>
+			<td>{{ form.grant.errors }}{{ form.grant }} to consume data about me</td>
+		</tr>
+		<tr>
+			<td>for {{ form.scope.errors }}{{ form.scope }}</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="submit" value="Save" class="button">
+				<a href="javascript:close_dialog('exception_panel')"><strong>Cancel</strong></a>
+			</td>
+		</tr>
+	</table>
+</form>
+<script type="text/javascript" charset="utf-8">
+	$(function(){
+		$('.button').button();
+		
+		$('#exception_form').ajaxForm(function(data){
+			if (data == 'OK') {
+				$('#exception_panel').fadeOut();
+				$('#exception_list').load('/control/exception/list/');
+			}
+			else {
+				$('#exception_panel').html(data);
+			}
+		});
+	});
+</script>

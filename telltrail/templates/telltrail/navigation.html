@@ -1,0 +1,12 @@
+<br/><br/>
+<div class="grid_2">
+	<strong><a href="/">Tell Trail</a></strong>
+</div>
+<div class="grid_10 right-aligned">
+	<strong>{% if not user.is_anonymous %}<a href="/control/" {% ifequal location 'control' %}class="selected"{% endifequal %}>control your data</a> : <a href="/trail/" {% ifequal location 'trail' %}class="selected"{% endifequal %}>your data trail</a> :{% endif %}  <a href="/about/" {% ifequal location 'about' %}class="selected"{% endifequal %}>about</a> : <a href="/" {% ifequal location 'landing' %}class="selected"{% endifequal %}>home</a> :: {% if user.is_anonymous %}<a href="/login/" {% ifequal location 'login' %}class="selected"{% endifequal %}>login</a>{% else %}<a href="/logout/">logout</a>{% endif %}</strong>
+</div>
+<div class="clear"></div>
+<div class="grid_12">
+	<hr/>
+</div>
+<div class="clear"></div>

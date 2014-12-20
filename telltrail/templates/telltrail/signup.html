@@ -1,0 +1,26 @@
+{% extends "telltrail/base.html" %}
+
+{% block content %}
+	<div class="grid_3">&nbsp;</div>
+	<div class="grid_6 centered">
+		<h3>Please fill out the information below.</h3>
+		<hr/>
+	</div>
+	<div class="grid_3">&nbsp;</div>
+	<div class="clear"></div>
+	<form id="signup_form" method="POST" action="/signup/">
+		<div class="grid_3">&nbsp;</div>
+		<div class="grid_6">
+			<table class="layout_table">
+				{{ form.as_table }}
+				<tr>
+					<td colspan="2">
+						<input type="submit" value="Go!">
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="grid_3">&nbsp;</div>
+		<div class="clear"></div>
+	</form>
+{% endblock %}

@@ -1,0 +1,34 @@
+<h5>Add a Specific Policy</h5>
+<form id="specific_form" method="POST" action="/control/specific/add/">
+	<table class="layout_form">
+		<tr>
+			<td>Data about</td>
+			<td>{{ form.scope.errors }}{{ form.scope }}</td>
+		</tr>
+		<tr>
+			<td>can be accessed by</td>
+			<td>{{ form.grant.errors }}{{ form.grant }}</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="submit" value="Save" class="button">
+				<a href="javascript:close_dialog('specific_panel')"><strong>Cancel</strong></a>
+			</td>
+		</tr>
+	</table>
+</form>
+<script type="text/javascript" charset="utf-8">
+	$(function(){
+		$('.button').button();
+		
+		$('#specific_form').ajaxForm(function(data){
+			if (data == 'OK') {
+				$('#specific_panel').fadeOut();
+				$('#policy_list').load('/control/specific/list/');
+			}
+			else {
+				$('#specific_panel').html(data);
+			}
+		});
+	});
+</script>

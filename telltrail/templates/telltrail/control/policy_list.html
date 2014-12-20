@@ -1,0 +1,21 @@
+{% if user.get_profile.specific_policies.count %}
+<table class="layout_table">
+	<tr>
+		<th>Scope</th>
+		<th>Data Use Permitted</th>
+		<th>Minimum Letter Grade Required</th>
+		<th>&nbsp;</th>
+	</tr>
+	{% for policy in user.get_profile.specific_policies %}
+	<tr {% cycle 'class="alt_row"' '' %}>
+		<td>{{ policy.scope }}</td>
+		<td>{{ policy.default_grant|yesno }}</td>
+		<td>{{ policy.minimum_grade }}</td>
+		<td><a href="javascript:delete_specific_policy({{ policy.pk }})">delete</a></td>
+	</tr>
+	{% endfor %}
+</table>
+{% else %}
+<p>You don't have any data policies other than your main policy.</p>
+<p><strong>With Specific Policies, you can apply fine-grained control to specific types of data about you.</strong></p>
+{% endif %}

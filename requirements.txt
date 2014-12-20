@@ -1,0 +1,7 @@
+Django==1.2.3
+PIL==1.1.7
+distribute==0.6.14
+django-piston==0.2.2
+psycopg2==2.2.2
+virtualenv==1.5.1
+wsgiref==0.1.2

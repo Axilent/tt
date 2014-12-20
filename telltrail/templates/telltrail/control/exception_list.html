@@ -1,0 +1,13 @@
+{% if user.get_profile.policy_exceptions.count %}
+<table class="layout_table">
+	{% for policy_exception in user.get_profile.policy_exceptions.all %}
+	<tr {% cycle 'class="alt_row"' '' %}>
+		<td><strong>{{ policy_exception.consumer }}</strong> {{ policy_exception.grant|yesno:"may,may not" }} access data about me{% if policy_exception.scope %} on the topic of <i>"{{ policy_exception.scope }}"</i>{% endif %}.</td>
+		<td><a href="javascript:delete_exception({{ policy_exception.pk }})">delete</a></td>
+	</tr>
+	{% endfor %}
+</table>
+{% else %}
+<p>There are no exceptions to the main policy for any data consumers.</p>
+<p><strong>Here you may add an exception to your data policy for a specific data consumer.</strong></p>
+{% endif %}

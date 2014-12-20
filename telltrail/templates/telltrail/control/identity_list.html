@@ -1,0 +1,19 @@
+{% if user.get_profile.identity_claims.count %}
+<table class="layout_table">
+	<tr>
+		<th>Service</th>
+		<th>Identity</th>
+		<th>&nbsp;</th>
+	</tr>
+	{% for claim in user.get_profile.identity_claims.all %}
+	<tr {% cycle 'class="alt_row"' '' %}>
+		<td>{{ claim.identity.service }}</td>
+		<td>{{ claim.identity.identity }}</td>
+		<td><a href="javascript:delete_identity({{ claim.pk }})">delete</a></td>
+	</tr>
+	{% endfor %}
+</table>
+{% else %}
+<p>You haven't entered any identities yet.</p>
+<p><strong>Adding identities will help Tell Trail identify data about you, and apply your policies to its use.</strong></p>
+{% endif %}

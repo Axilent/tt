@@ -1,0 +1,41 @@
+{% extends "telltrail/base.html" %}
+
+{% block additional_scripts %}
+	<script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}js/control.js"></script>
+{% endblock %}
+
+{% block content %}
+	<div id="personal_info">
+		{% include 'telltrail/control/info_view.html' %}
+	</div>
+	<div class="grid_12">
+		<hr/>
+	</div>
+	<div id="identities">
+		{% include 'telltrail/control/identity_view.html' %}
+	</div>
+	<div class="grid_12"><hr/></div><div class="clear"></div>
+	<div id="data_policy">
+		{% include 'telltrail/control/policy_view.html' %}
+	</div>
+	<div class="grid_12 centered">
+		<hr/>
+		<p><a href="javascript:show_advanced();" class="button">I need more fine-grained control.</a></p>
+	</div>
+	<div class="clear"></div>
+	<div id="advanced" class="hidden">
+		{% include 'telltrail/control/advanced.html' %}
+	</div>
+	
+	<div class="clear"></div>
+
+{% endblock %}
+
+{% block body_scripts %}
+	<script type="text/javascript" charset="utf-8">
+		$(function(){
+			$('.button').button();
+			$('#usage_selector').buttonset();
+		});
+	</script>
+{% endblock %}

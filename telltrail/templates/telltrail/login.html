@@ -1,0 +1,20 @@
+{% extends "telltrail/base.html" %}
+
+{% block content %}
+	<div class="grid_3">&nbsp;</div>
+	<div class="grid_6 centered">
+		<h3>Please log in.</h3>
+		<form id="login_form" method="POST" action="/login/">
+			<table class="layout_table">
+				{{ form.as_table }}
+				<tr>
+					<td colspan="2">
+						<input type="submit" value="login">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div class="grid_3">&nbsp;</div>
+	<div class="clear"></div>
+{% endblock %}

@@ -1,0 +1,42 @@
+<div class="grid_9">
+	<h4>Data Policy</h4>
+	<div class="dialog ui-corner-all">
+		<form id="policy_form" method="POST" action="/control/policy/edit/">
+			<table class="layout_table">
+				{{ form.as_table }}
+				<tr>
+					<td colspan="2">
+						<input type="submit" class="button" value="Save">
+						<a href="javascript:view_policy()"><strong>Cancel</strong></a>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+<div class="grid_3">
+	<div class="orange ui-corner-all">
+		<p>Your <strong>data policy</strong> controls how data about you is used.</p>
+		<h5>Letter Grades</h5>
+		<ul>
+			<li><strong>A</strong>: This data consumer has been <a href="">certified</a> by Saaspire to adhere to the <a href="">Preferred Data Usage</a> agreement.</li>
+			<li><strong>B</strong>: This data consumer has agreed to adhere to the <a href="">Preferred Data Usage</a> agreement.</a></li>
+			<li><strong>C</strong>: This data consumer has agreed to the <a href="">Standard Data Usage</a> agreement.</a></li>
+		</ul>
+	</div>
+</div>
+<div class="clear"></div>
+<script type="text/javascript" charset="utf-8">
+	$(function(){
+		$('.button').button();
+		
+		$('#policy_form').ajaxForm(function(data){
+			if (data == 'OK') {
+				$('#data_policy').load('/control/policy/');
+			}
+			else {
+				$('#data_policy').html(data);
+			}
+		});
+	});
+</script>
