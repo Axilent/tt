@@ -107,7 +107,7 @@ if not local_static:
     STATICFILES_STORAGE = DEFAULT_FILE_STORAGE
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
-    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME','telltrail_prototype')
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME','telltrail-prototype')
     STATIC_HOST = os.environ.get('STATIC_HOST','//s3.amazonaws.com')
     STATIC_URL = '%s/%s/' % (STATIC_HOST,AWS_STORAGE_BUCKET_NAME)
 
