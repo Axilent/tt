@@ -4,6 +4,8 @@ Sharrock==0.6.3.6
 boto==2.34.0
 dj-database-url==0.3.0
 django-storages==1.1.8
+gevent==1.0.1
+greenlet==0.4.5
 gunicorn==18.0
 psycopg2==2.5.4
 requests==2.5.0
