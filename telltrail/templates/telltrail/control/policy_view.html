@@ -1,7 +1,7 @@
 <div class="grid_9">
 	<h3>Data Policy</h3>
-	<h5>Data usage is <strong>{{ user.get_profile.default_policy.default_grant|yesno:"Permitted,Not Permitted"}}</strong>.</h5>
-	<h5>Minimum data consumer letter grade is <strong>{{ user.get_profile.default_policy.minimum_grade }}</strong>.</h5>
+	<h5>Data usage is <strong>{{ ci.default_policy.default_grant|yesno:"Permitted,Not Permitted"}}</strong>.</h5>
+	<h5>Minimum data consumer letter grade is <strong>{{ ci.default_policy.minimum_grade }}</strong>.</h5>
 </div>
 <div class="grid_3">
 	<p><a href="javascript:edit_policy()" class="button">Edit Data Policy</a></p>

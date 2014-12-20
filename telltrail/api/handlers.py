@@ -3,7 +3,7 @@ Handlers for TellTrail API.
 """
 from piston.handler import BaseHandler
 from piston.utils import rc
-from saaspire.telltrail.models import Identity, DataSource, Service
+from telltrail.models import Identity, DataSource, Service
 from itertools import chain
 
 class PolicyHandler(BaseHandler):

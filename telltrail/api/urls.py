@@ -1,5 +1,5 @@
 from piston.resource import Resource
-from saaspire.telltrail.api.handlers import *
+from telltrail.api.handlers import *
 from django.conf.urls import *
 from django.conf.urls.defaults import *
 

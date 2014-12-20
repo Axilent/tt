@@ -1,6 +1,6 @@
-{% if user.get_profile.policy_exceptions.count %}
+{% if ci.policy_exceptions.count %}
 <table class="layout_table">
-	{% for policy_exception in user.get_profile.policy_exceptions.all %}
+	{% for policy_exception in ci.policy_exceptions.all %}
 	<tr {% cycle 'class="alt_row"' '' %}>
 		<td><strong>{{ policy_exception.consumer }}</strong> {{ policy_exception.grant|yesno:"may,may not" }} access data about me{% if policy_exception.scope %} on the topic of <i>"{{ policy_exception.scope }}"</i>{% endif %}.</td>
 		<td><a href="javascript:delete_exception({{ policy_exception.pk }})">delete</a></td>
