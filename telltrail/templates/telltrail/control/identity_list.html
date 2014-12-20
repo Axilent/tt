@@ -1,11 +1,11 @@
-{% if user.get_profile.identity_claims.count %}
+{% if ci.identity_claims.count %}
 <table class="layout_table">
 	<tr>
 		<th>Service</th>
 		<th>Identity</th>
 		<th>&nbsp;</th>
 	</tr>
-	{% for claim in user.get_profile.identity_claims.all %}
+	{% for claim in ci.identity_claims.all %}
 	<tr {% cycle 'class="alt_row"' '' %}>
 		<td>{{ claim.identity.service }}</td>
 		<td>{{ claim.identity.identity }}</td>

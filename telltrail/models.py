@@ -104,7 +104,7 @@ class Service(models.Model):
     An internet service on which someone may have an identity.
     """
     name = models.CharField(unique=True, max_length=100)
-    url = models.URLField(blank=True, verify_exists=False)
+    url = models.URLField(blank=True,)
     verified = models.BooleanField(default=False)
     
     def __unicode__(self):
@@ -137,7 +137,7 @@ class DataConsumer(models.Model):
     A consumer of data.
     """
     name = models.CharField(max_length=100)
-    domain = models.URLField(verify_exists=False)
+    domain = models.URLField()
     letter_grade = models.CharField(max_length=1,default='C')
     
     def __unicode__(self):

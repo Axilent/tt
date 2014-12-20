@@ -1,7 +1,8 @@
 {% extends "telltrail/base.html" %}
+{% load staticfiles %}
 
 {% block additional_scripts %}
-	<script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}js/control.js"></script>
+	<script type="text/javascript" charset="utf-8" src="{% static "js/control.js" %}"></script>
 {% endblock %}
 
 {% block content %}

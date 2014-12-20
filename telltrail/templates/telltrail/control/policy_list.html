@@ -1,4 +1,4 @@
-{% if user.get_profile.specific_policies.count %}
+{% if ci.specific_policies.count %}
 <table class="layout_table">
 	<tr>
 		<th>Scope</th>
@@ -6,7 +6,7 @@
 		<th>Minimum Letter Grade Required</th>
 		<th>&nbsp;</th>
 	</tr>
-	{% for policy in user.get_profile.specific_policies %}
+	{% for policy in ci.specific_policies %}
 	<tr {% cycle 'class="alt_row"' '' %}>
 		<td>{{ policy.scope }}</td>
 		<td>{{ policy.default_grant|yesno }}</td>

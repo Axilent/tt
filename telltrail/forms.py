@@ -4,7 +4,7 @@ Forms for TellTrail.
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib import auth
-from saaspire.telltrail.models import *
+from telltrail.models import *
 import re
 
 class SignupForm(forms.Form):
@@ -140,16 +140,17 @@ class PersonalInfoForm(forms.Form):
         """
         Initializes the form with the user data.
         """
+        ci = CanonicalIdentity.objects.get(user=user)
         self.initial['first_name'] = user.first_name
         self.initial['last_name'] = user.last_name
-        self.initial['city'] = user.get_profile().city
-        self.initial['zip_code'] = user.get_profile().zip_code
+        self.initial['city'] = ci.city
+        self.initial['zip_code'] = ci.zip_code
     
     def update_user(self,user):
         """
         Updates the user.
         """
-        ci = user.get_profile()
+        ci = CanonicalIdentity.objects.get(user=user)
         ci.city = self.cleaned_data.get('city',None)
         ci.zip_code = self.cleaned_data.get('zip_code',None)
         ci.save()
@@ -212,13 +213,14 @@ class IdentityForm(forms.Form):
         """
         Adds a new identity.
         """
+        ci = CanonicalIdentity.objects.get(user=user)
         identity, created = Identity.objects.get_or_create(service=self.cleaned_data['service'],identity=self.cleaned_data['identity'])
         if created:
-            IdentityClaim.objects.create(canonical_identity=user.get_profile(),identity=identity,claim_confidence=75)
+            IdentityClaim.objects.create(canonical_identity=ci,identity=identity,claim_confidence=75)
         else:
             claim_count = identity.identity_claims.count()
             claim_confidence = min(100 / claim_count,75) if claim_count else 75
-            IdentityClaim.objects.create(canonical_identity=user.get_profile(),identity=identity,claim_confidence=claim_confidence)
+            IdentityClaim.objects.create(canonical_identity=ci,identity=identity,claim_confidence=claim_confidence)
 
 
 class ExceptionForm(forms.Form):
@@ -233,7 +235,8 @@ class ExceptionForm(forms.Form):
         """
         Adds an exception.
         """
-        PolicyException.objects.create(canonical_identity=user.get_profile(),
+        ci = CanonicalIdentity.objects.get(user=user)
+        PolicyException.objects.create(canonical_identity=ci,
                                        consumer=self.cleaned_data['consumer'],
                                        scope=self.cleaned_data['scope'],
                                        grant=True if self.cleaned_data['grant'] == 'permitted' else False)
@@ -252,9 +255,10 @@ class SpecificPolicyForm(forms.Form):
         """
         Creates a specific policy for the specified user.
         """
+        ci = CanonicalIdentity.objects.get(user=user)
         granted = self.cleaned_data['grant'] != 'no'
         min_grade = self.cleaned_data['grant'] if granted else None
-        PolicyElement.objects.create(canonical_identity=user.get_profile(),
+        PolicyElement.objects.create(canonical_identity=ci,
                                      scope=self.cleaned_data['scope'],
                                      default_grant=granted,
                                      minimum_grade=min_grade)

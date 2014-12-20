@@ -2,9 +2,10 @@
 Views for telltrail.
 """
 from django.http import HttpResponse, HttpResponseRedirect
-from saaspire.utils import template, catch
-from saaspire.telltrail.forms import *
+from telltrail.utils import template, catch
+from telltrail.forms import *
 from django.contrib import auth
+from telltrail.models import CanonicalIdentity
 
 @template('telltrail/landing.html')
 def landing(request):
@@ -98,14 +99,15 @@ def edit_policy(request):
     Edits the main data policy.
     """
     form = None
+    ci = CanonicalIdentity.objects.get(user=request.user)
     if request.POST:
         form = PolicyForm(request.POST)
         if form.is_valid():
-            form.update_policy(request.user.get_profile().default_policy)
+            form.update_policy(ci.default_policy)
             return 'OK'
     else:
         form = PolicyForm()
-        form.init(request.user.get_profile().default_policy)
+        form.init(ci.default_policy)
     return {'form':form}
 
 @template('telltrail/control/policy_view.html')
@@ -143,7 +145,8 @@ def delete_identity(request,claim_id):
     Deletes the user's claim on an identity.
     """
     try:
-        claim = request.user.get_profile().identity_claims.get(pk=claim_id)
+        ci = CanonicalIdentity.objects.get(user=request.user)
+        claim = ci.identity_claims.get(pk=claim_id)
         claim.delete()
     except IdentityClaim.DoesNotExist:
         pass
@@ -177,7 +180,8 @@ def delete_exception(request,exception_id):
     Deletes the policy exception.
     """
     try:
-        policy_exception = request.user.get_profile().policy_exceptions.get(pk=exception_id)
+        ci = CanonicalIdentity.objects.get(user=request.user)
+        policy_exception = ci.policy_exceptions.get(pk=exception_id)
         policy_exception.delete()
     except PolicyException.DoesNotExist:
         pass
@@ -211,7 +215,8 @@ def delete_specific_policy(request,policy_id):
     Deletes the specific policy.
     """
     try:
-        policy = request.user.get_profile().specific_policies.get(pk=policy_id)
+        ci = CanonicalIdentity.objects.get(user=user)
+        policy = ci.specific_policies.get(pk=policy_id)
         policy.delete()
     except PolicyElement.DoesNotExist:
         pass
